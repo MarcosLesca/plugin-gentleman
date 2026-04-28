@@ -8,7 +8,7 @@ import { getLatestAssistantModelContext } from "../runtime/plugin-api.ts"
 import { zoneColors } from "../ascii-frames.ts"
 import { McpStatus, ProgressBar } from "../progress-components.tsx"
 import { getSidebarMustachiZoneBackgroundColor, getSidebarMustachiZoneColor } from "./zone-colors.ts"
-import { buildMustachiFace, SIDEBAR_FACE_WIDTH, type FaceSegment } from "./sidebar/face-builder.ts"
+import { buildMustachiFace, normalizeSidebarFaceLine, SIDEBAR_FACE_WIDTH, type FaceSegment } from "./sidebar/face-builder.ts"
 import {
   setupBlinkEffect,
   setupExpressiveCycleEffect,
@@ -20,7 +20,7 @@ import { resolveProp, type SidebarMustachiProps } from "./sidebar/shared.ts"
 
 type SegmentedCell = { content: string; zone: FaceSegment["zone"] | "unknown" }
 
-const buildSegmentedCells = (segments: FaceSegment[]): SegmentedCell[] => {
+const buildSegmentedCells = (segments: FaceSegment[], width = SIDEBAR_FACE_WIDTH): SegmentedCell[] => {
   const cells: SegmentedCell[] = []
 
   segments.forEach(segment => {
@@ -29,11 +29,11 @@ const buildSegmentedCells = (segments: FaceSegment[]): SegmentedCell[] => {
     })
   })
 
-  while (cells.length < SIDEBAR_FACE_WIDTH) {
+  while (cells.length < width) {
     cells.push({ content: " ", zone: "unknown" })
   }
 
-  return cells
+  return cells.slice(0, width)
 }
 
 const getSegmentedCellBackgroundColor = (cell: SegmentedCell): string | undefined => {
@@ -198,7 +198,7 @@ export const SidebarMustachi = (props: SidebarMustachiProps) => {
         }
 
         const color = getSidebarMustachiZoneColor(zone, props.theme)
-        const paddedLine = content.padEnd(SIDEBAR_FACE_WIDTH, " ")
+        const paddedLine = normalizeSidebarFaceLine(content)
         return <text fg={color}>{paddedLine}</text>
       })}
 
