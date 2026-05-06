@@ -1,0 +1,103 @@
+name: Feature Request
+description: Suggest a new feature or improvement for Plugin Gentleman
+labels: ["type:feature", "status:needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # ✨ Feature Request
+
+        Thanks for suggesting an improvement. Focus first on the problem or user experience you want to improve.
+
+        > **How this works:**
+        > 1. You submit this issue → it gets `status:needs-review` automatically.
+        > 2. A maintainer reviews it → adds `status:approved` if accepted.
+        > 3. Only then should a PR be opened to implement it.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: "📋 Pre-flight Checks"
+      description: Please confirm before submitting.
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: I understand this issue needs `status:approved` before a PR should be opened
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "🔍 Problem Description"
+      description: What problem does this solve? Describe the pain point before proposing the solution.
+      placeholder: |
+        I'm frustrated when...
+        It is currently hard to...
+        Contributors/users need a way to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: "💡 Proposed Solution"
+      description: Describe the behavior you want from the user's perspective.
+      placeholder: |
+        I would like Plugin Gentleman to...
+
+        Example config:
+        ```json
+        {
+          "plugin": [["plugin-gentleman", { }]]
+        }
+        ```
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: "📦 Affected Area"
+      options:
+        - Home logo / theme
+        - Sidebar Mustachi rendering
+        - Animations / busy state
+        - Personality phrases
+        - OS/provider detection
+        - Metrics display
+        - Configuration options
+        - Packaging / npm install
+        - Developer workflow
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: change-size
+    attributes:
+      label: "📏 Expected Change Size"
+      description: A rough estimate helps maintainers review scope early.
+      options:
+        - Small — focused config/docs/rendering tweak
+        - Medium — touches several related files
+        - Large — likely needs design discussion or smaller PR slices
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "🔄 Alternatives Considered"
+      description: What workarounds or other approaches did you consider?
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "📎 Additional Context"
+      description: Screenshots, mockups, examples, upstream OpenCode behavior, or references.
+    validations:
+      required: false
