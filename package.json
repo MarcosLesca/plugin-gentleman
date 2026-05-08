@@ -5,7 +5,7 @@
   "description": "OpenCode TUI plugin featuring Mustachi - an animated ASCII mascot with eyes, mustache, and optional motivational phrases during busy states",
   "type": "module",
   "bin": {
-    "plugin-gentleman": "./bin/plugin-gentleman.js"
+    "plugin-gentleman": "bin/plugin-gentleman.js"
   },
   "exports": {
     "./tui": {
